@@ -11,6 +11,8 @@ requirejs([
     '../lib/config',
     '../lib/auth',
     '../lib/jira/ls',
+    '../lib/jira/bugs',
+    '../lib/jira/testing',
     '../lib/jira/describe',
     '../lib/jira/assign',
     '../lib/jira/comment',
@@ -20,7 +22,7 @@ requirejs([
     '../lib/jira/worklog',
     '../lib/jira/link',
     '../lib/jira/watch',
-], function (program, config, auth, ls, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
+], function (program, config, auth, ls, bugs, testing, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
 
     function finalCb() {
         process.exit(1);
@@ -31,17 +33,47 @@ requirejs([
 
     program
         .command('ls')
-        .description('List my issues')
+        .description('List my open Tehama Jira issues')
         .option('-p, --project <name>', 'Filter by project', String)
         .option('-t, --type <name>', 'Filter by type', String)
+        .option('-s, --status <name>', 'Filter by status', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.project) {
                         ls.showByProject(options.project, options.type);
+                    } else if (options.status) {
+                        ls.showByStatus(options.status);
                     } else {
-                        ls.showAll(options.type);
+                        ls.list(options.type);
                     }
+                }
+            });
+        });
+
+    program
+        .command('bugs')
+        .description('List All Tehama Bugs, the default is all Bugs that are not ready to test')
+        .option('-s, --status <status>', 'All Tehama Bugs by Status', String)
+        .action(function (options) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    if (options.status) {
+                        bugs.listAllBugsByStatus(options.status);
+                    } else {
+                        bugs.listAllBugsNotReadyToTest();
+                    }
+                }
+            });
+        });
+
+    program
+        .command('testing')
+        .description('List All Tehama issues in READY TO TEST or TESTING COMPLETE')
+        .action(function (options) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    testing.listAll();
                 }
             });
         });
@@ -112,12 +144,12 @@ requirejs([
         });
 
     program
-        .command('running')
-        .description('List issues in progress.')
+        .command('in-development')
+        .description('List all my Tehama Jira issues with status IN DEVELOPMENT.')
         .action(function () {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.showInProgress();
+                    ls.showInDevelopment();
                 }
             });
         });
