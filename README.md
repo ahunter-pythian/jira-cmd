@@ -1,11 +1,11 @@
 jira-cmd fork for Tehama
 =========================
 
-Forked jira-cmd to support the Jira issue statuses and types used by Tehama.
+Forked jira-cmd to support the Jira issue statuses, types and fix versions used by Tehama.
 
 Follow installation and first use instructions below to use. 
 
-There are currently four commands supported for Tehama:
+There are currently five commands supported for Tehama:
 
     ls [options]           List my open Tehama issues
     bugs [options]         List All Tehama Bugs, the default is all Bugs that are not ready to test
