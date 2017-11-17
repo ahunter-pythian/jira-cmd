@@ -33,7 +33,7 @@ requirejs([
 
     program
         .command('ls')
-        .description('List my open Tehama Jira issues')
+        .description('List my open Tehama issues')
         .option('-p, --project <name>', 'Filter by project', String)
         .option('-t, --type <name>', 'Filter by type', String)
         .option('-s, --status <name>', 'Filter by status', String)
@@ -236,7 +236,7 @@ requirejs([
 
     program
         .command('show <issue>')
-        .description('Show info about an issue')
+        .description('Show info about a Tehama issue')
         .option('-o, --output <field>', 'Output field content', String)
         .action(function (issue, options) {
             auth.setConfig(function (auth) {
