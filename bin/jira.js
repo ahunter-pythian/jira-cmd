@@ -45,7 +45,7 @@ requirejs([
                     } else if (options.status) {
                         ls.showByStatus(options.status);
                     } else {
-                        ls.list(options.type);
+                        ls.showAll(options.type);
                     }
                 }
             });
