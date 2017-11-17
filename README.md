@@ -7,10 +7,11 @@ Follow installation and first use instructions below to use.
 
 There are currently four commands supported for Tehama:
 
-    ls [options]           List my open Tehama Jira issues
+    ls [options]           List my open Tehama issues
     bugs [options]         List All Tehama Bugs, the default is all Bugs that are not ready to test
     testing                List All Tehama issues in READY TO TEST or TESTING COMPLETE
     in-development         List all my Tehama Jira issues with status IN DEVELOPMENT.
+    show [options] <issue> Show info about a Tehama issue
 
 
 [![NPM Version](https://badge.fury.io/js/jira-cmd.svg)](https://npmjs.org/package/jira-cmd)
