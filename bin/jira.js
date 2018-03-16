@@ -55,11 +55,14 @@ requirejs([
         .command('bugs')
         .description('List All Tehama Bugs, the default is all Bugs that are not ready to test')
         .option('-s, --status <status>', 'All Tehama Bugs by Status', String)
+        .option('-b, --bug <bug>', 'One Tehama Bug by Number', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.status) {
                         bugs.listAllBugsByStatus(options.status);
+                    } else if (options.bug) {
+                            bugs.listOneBug(options.bug);
                     } else {
                         bugs.listAllBugsNotReadyToTest();
                     }
