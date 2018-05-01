@@ -15,6 +15,7 @@ requirejs([
     '../lib/jira/testing',
     '../lib/jira/describe',
     '../lib/jira/assign',
+    '../lib/jira/release',
     '../lib/jira/comment',
     '../lib/jira/create',
     '../lib/jira/sprint',
@@ -22,7 +23,7 @@ requirejs([
     '../lib/jira/worklog',
     '../lib/jira/link',
     '../lib/jira/watch',
-], function (program, config, auth, ls, bugs, testing, describe, assign, comment, create, sprint, transitions, worklog, link, watch) {
+], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch) {
 
     function finalCb() {
         process.exit(1);
@@ -62,7 +63,7 @@ requirejs([
                     if (options.status) {
                         bugs.listAllBugsByStatus(options.status);
                     } else if (options.bug) {
-                            bugs.listOneBug(options.bug);
+                        bugs.listOneBug(options.bug);
                     } else {
                         bugs.listAllBugsNotReadyToTest();
                     }
@@ -203,6 +204,17 @@ requirejs([
                     } else {
                         assign.me(issue);
                     }
+                }
+            });
+        });
+
+    program
+        .command('release <issue> <version>')
+        .description('Attach a Tehama issue to release <version>.')
+        .action(function (issue, version) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    release.to(issue, version);
                 }
             });
         });
