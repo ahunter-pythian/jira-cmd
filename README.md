@@ -7,11 +7,12 @@ Follow installation and first use instructions below to use.
 
 There are currently five commands supported for Tehama:
 
-    ls [options]           List my open Tehama issues
-    bugs [options]         List All Tehama Bugs, the default is all Bugs that are not ready to test
-    testing                List All Tehama issues in READY TO TEST or TESTING COMPLETE
-    in-development         List all my Tehama Jira issues with status IN DEVELOPMENT.
-    show [options] <issue> Show info about a Tehama issue
+    ls [options]               List my open Tehama issues
+    bugs [options]             List All Tehama Bugs, the default is all Bugs that are not ready to test
+    testing                    List All Tehama issues in READY TO TEST or TESTING COMPLETE
+    in-development             List all my Tehama Jira issues with status IN DEVELOPMENT.
+    release <issue> <version>  Attach a Tehama <issue> to release <version>.
+    show [options] <issue>     Show info about a Tehama <issue>
 
 
 [![NPM Version](https://badge.fury.io/js/jira-cmd.svg)](https://npmjs.org/package/jira-cmd)
@@ -27,22 +28,32 @@ Install [node.js](http://nodejs.org/).
 
 Then, in your shell type:
 
-    $ npm install -g jira-cmd
+    $ git clone https://github.com/ahunter-pythian/jira-cmd
+    $ cd jira-cmd
+    $ npm install -g jira
+
+The to be able to run jira-cmd, type:
+
+    $ ln -s /usr/local/bin/jira-cmd
+    $ ls -l /usr/local/bin/jira-cmd /Users/ahunter/clones/jira-cmd/bin/jira.js
+    lrwxr-xr-x  1 ahunter  staff    42B 15 Nov  2017 /usr/local/bin/jira-cmd@ -> /Users/ahunter/clones/jira-cmd/bin/jira.js
+
 
 ## Usage
 
 ##### First use
 
-    $ jira
+    $ jira-cmd
     Jira URL: https://jira.atlassian.com/
     Username: xxxxxx
     Password: xxxxxx
     Information stored!
 
-This save your credentials (base64 encoded) in your `$HOME/.jira` folder.
+This will save your Jira credentials (base64 encoded) in your `$HOME/.jira` folder.
 
 ##### Help
 
+  The full list of commands are below, the non Tehama commands listed above may not work.
 
   Usage: jira.js [options] [command]
 
