@@ -23,7 +23,8 @@ requirejs([
     '../lib/jira/worklog',
     '../lib/jira/link',
     '../lib/jira/watch',
-], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch) {
+    '../lib/jira/versions',
+], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch, versions) {
 
     function finalCb() {
         process.exit(1);
@@ -55,13 +56,16 @@ requirejs([
     program
         .command('bugs')
         .description('List All Tehama Bugs, the default is all Bugs that are not ready to test')
-        .option('-s, --status <status>', 'All Tehama Bugs by Status', String)
+        .option('-s, --status <status>', 'All Tehama Bugs at Status', String)
+        .option('-p, --priority <priority>', 'All Tehama Bugs at priority', String)
         .option('-b, --bug <bug>', 'One Tehama Bug by Number', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.status) {
                         bugs.listAllBugsByStatus(options.status);
+                    } else if (options.priority) {
+                        bugs.listAllBugsByPriority(options.priority);
                     } else if (options.bug) {
                         bugs.listOneBug(options.bug);
                     } else {
@@ -73,7 +77,7 @@ requirejs([
 
     program
         .command('testing')
-        .description('List All Tehama issues in READY TO TEST or TESTING COMPLETE')
+        .description('List All Tehama issues in SUBMITTED TO TEST, READY TO TEST or TESTING COMPLETE')
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
@@ -203,6 +207,22 @@ requirejs([
                         assign.to(issue, user);
                     } else {
                         assign.me(issue);
+                    }
+                }
+            });
+        });
+
+    program
+        .command('versions')
+        .description('List the fix version for a Tehama Bug')
+        .option('-i, --issue <issue>', 'Tehama Issue Number', String)
+        .action(function (options) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    if (options.issue) {
+                        versions.listVersions(options.issue);
+                    } else {
+                        console.log('No issue specified');
                     }
                 }
             });
