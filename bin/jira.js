@@ -124,18 +124,11 @@ requirejs([
 
     program
         .command('done <issue>')
-        .option('-r, --resolution <name>', 'resolution name (e.g. \'Resolved\')', String)
-        .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
-        .description('Mark issue as finished.')
-        .action(function (issue, options) {
+        .description('Move a Tehama issue to DONE status.')
+        .action(function (issue) {
             auth.setConfig(function (auth) {
                 if (auth) {
-
-                    if (options.timeSpent) {
-                        worklog.add(issue, options.timeSpent, "auto worklog", new Date());
-                    }
-
-                    transitions.done(issue, options.resolution);
+                    transitions.done(issue);
                 }
             });
         });
