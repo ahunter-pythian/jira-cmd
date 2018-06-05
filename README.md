@@ -5,15 +5,16 @@ Forked jira-cmd to support the Jira issue statuses, types and fix versions used 
 
 Follow installation and first use instructions below to use. 
 
-There are currently seven commands supported for Tehama:
+There are currently eight commands supported for Tehama:
 
-    ls [options]           List my open Tehama issues
-    bugs [options]         List All Tehama Bugs, the default is all Bugs that are not ready to test
-    testing                List All Tehama issues in SUBMITTED TO TEST, READY TO TEST or TESTING COMPLETE
-    in-development         List all my Tehama Jira issues with status IN DEVELOPMENT.
-    versions [options]     List the fix version for a Tehama Bug
-    release <issue> <version> Attach a Tehama issue to release <version>.
-    show [options] <issue> Show info about a Tehama issue
+    ls [options]                List my open Tehama issues
+    bugs [options]              List All Tehama Bugs, the default is all Bugs that are not ready to test
+    testing                     List All Tehama issues in SUBMITTED TO TEST, READY TO TEST or TESTING COMPLETE
+    done <issue>                Move a Tehama issue to DONE status.
+    in-development              List all my Tehama Jira issues with status IN DEVELOPMENT.
+    versions [options]          List the fix version for a Tehama Bug
+    release <issue> <version>   Attach a Tehama issue to release <version>.
+    show [options] <issue>      Show info about a Tehama issue
 
 
 [![NPM Version](https://badge.fury.io/js/jira-cmd.svg)](https://npmjs.org/package/jira-cmd)
