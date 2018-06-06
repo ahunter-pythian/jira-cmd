@@ -26,7 +26,10 @@ requirejs([
     '../lib/jira/versions',
 ], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch, versions) {
 
-    function finalCb() {
+    function finalCb(err) {
+        if(err){
+            console.log(err.toString());
+        }
         process.exit(1);
     }
 
@@ -45,9 +48,9 @@ requirejs([
                     if (options.project) {
                         ls.showByProject(options.project, options.type);
                     } else if (options.status) {
-                        ls.showByStatus(options.status);
+                        ls.showByStatus(options.status, finalCb);
                     } else {
-                        ls.showAll(options.type);
+                        ls.showAll(options.type, finalCb);
                     }
                 }
             });
@@ -63,13 +66,13 @@ requirejs([
             auth.setConfig(function (auth) {
                 if (auth) {
                     if (options.status) {
-                        bugs.listAllBugsByStatus(options.status);
+                        bugs.listAllBugsByStatus(options.status, finalCb);
                     } else if (options.priority) {
-                        bugs.listAllBugsByPriority(options.priority);
+                        bugs.listAllBugsByPriority(options.priority, finalCb);
                     } else if (options.bug) {
-                        bugs.listOneBug(options.bug);
+                        bugs.listOneBug(options.bug, finalCb);
                     } else {
-                        bugs.listAllBugsNotReadyToTest();
+                        bugs.listAllBugsNotReadyToTest(finalCb);
                     }
                 }
             });
@@ -150,7 +153,7 @@ requirejs([
         .action(function () {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.showInDevelopment();
+                    ls.showInDevelopment(finalCb());
                 }
             });
         });
@@ -184,7 +187,7 @@ requirejs([
         .action(function (query) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    ls.search(query);
+                    ls.search(query, finalCb());
                 }
             });
         });
