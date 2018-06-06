@@ -14,6 +14,7 @@ There are currently nine commands supported for Tehama:
     ready-to-test <issue>       Move a Tehama issue to READY TO TEST status.
     in-development              List all my Tehama Jira issues with status IN DEVELOPMENT.
     versions [options]          List the fix version for a Tehama Bug
+    status <issue>              Get the current status for a Tehama issue
     release <issue> <version>   Attach a Tehama issue to release <version>.
     show [options] <issue>      Show info about a Tehama issue
 
