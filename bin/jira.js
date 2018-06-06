@@ -137,6 +137,17 @@ requirejs([
         });
 
     program
+        .command('ready-to-test <issue>')
+        .description('Move a Tehama issue to READY TO TEST status.')
+        .action(function (issue) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    transitions.readyToTest(issue);
+                }
+            });
+        });
+
+    program
         .command('invalid <issue>')
         .description('Mark issue as finished.')
         .action(function (issue) {
