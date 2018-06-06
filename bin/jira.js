@@ -39,15 +39,12 @@ requirejs([
     program
         .command('ls')
         .description('List my open Tehama issues')
-        .option('-p, --project <name>', 'Filter by project', String)
         .option('-t, --type <name>', 'Filter by type', String)
         .option('-s, --status <name>', 'Filter by status', String)
         .action(function (options) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    if (options.project) {
-                        ls.showByProject(options.project, options.type);
-                    } else if (options.status) {
+                    if (options.status) {
                         ls.showByStatus(options.status, finalCb);
                     } else {
                         ls.showAll(options.type, finalCb);
