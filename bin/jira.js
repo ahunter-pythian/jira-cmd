@@ -24,13 +24,14 @@ requirejs([
     '../lib/jira/link',
     '../lib/jira/watch',
     '../lib/jira/versions',
-], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch, versions) {
+    '../lib/jira/status',
+], function (program, config, auth, ls, bugs, testing, describe, assign, release, comment, create, sprint, transitions, worklog, link, watch, versions, status) {
 
     function finalCb(err) {
-        if(err){
+        if (err) {
             console.log(err.toString());
+            process.exit(1);
         }
-        process.exit(1);
     }
 
     program
@@ -228,6 +229,17 @@ requirejs([
                     } else {
                         console.log('No issue specified');
                     }
+                }
+            });
+        });
+
+    program
+        .command('status <issue>')
+        .description('Get the current status for a Tehama issue')
+        .action(function (issue) {
+            auth.setConfig(function (auth) {
+                if (auth) {
+                    status.listStatus(issue);
                 }
             });
         });
