@@ -9,9 +9,9 @@ There are currently nine commands supported for Tehama:
 
     ls [options]                List my open Tehama issues
     bugs [options]              List All Tehama Bugs, the default is all Bugs that are not ready to test
-    testing                     List All Tehama issues in SUBMITTED TO TEST, READY TO TEST or TESTING COMPLETE
+    testing                     List All Tehama issues in SUBMITTED TO TEST, READY FOR TEST or TESTING COMPLETE
     done <issue>                Move a Tehama issue to DONE status.
-    ready-to-test <issue>       Move a Tehama issue to READY TO TEST status.
+    ready-for-test <issue>      Move a Tehama issue to READY FOR TEST status.
     in-development              List all my Tehama Jira issues with status IN DEVELOPMENT.
     versions [options]          List the fix version for a Tehama Bug
     status <issue>              Get the current status for a Tehama issue
