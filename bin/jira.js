@@ -135,12 +135,12 @@ requirejs([
         });
 
     program
-        .command('ready-to-test <issue>')
-        .description('Move a Tehama issue to READY TO TEST status.')
+        .command('ready-for-test <issue>')
+        .description('Move a Tehama issue to READY FOR TEST status.')
         .action(function (issue) {
             auth.setConfig(function (auth) {
                 if (auth) {
-                    transitions.readyToTest(issue);
+                    transitions.readyForTest(issue);
                 }
             });
         });
